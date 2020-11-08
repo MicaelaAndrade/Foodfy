@@ -1,0 +1,52 @@
+{% extends "layout.njk" %}
+
+{% block head %}
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+{% endblock head %}
+
+{% block search %}
+  <form action="/results" method="get">
+    <input type="text" name="filter" placeholder="Buscar uma receita">
+    <button>Buscar</button>
+  </form>
+{% endblock search %}
+
+{% block content %}
+  <main>
+    <section class="presentation">
+      <div class="presentation__texts">
+        <h1>As melhores receitas</h1>
+        <p>
+          Aprenda a construir os melhores pratos com receitas criadas por profissionais do mundo inteiro.
+        </p>
+      </div>
+      <img src="/assets/chef.png" alt="Chef Foodfy"/>
+    </section>
+
+    <h2>Mais acessadas</h2>
+
+    <section class="recipes">
+      {% for recipe in recipes %}
+        <div class="recipe">
+          <div class="recipe__image">
+            <img src="{{recipe.image}}" alt="Imagem de {{recipe.title}}"/>
+          </div>
+          <h3>{{recipe.title}}</h3>
+          <p>{{recipe.author}}</p>
+          <a href="/recipes/{{recipe.id}}" class="button">Ver Receita</a>
+        </div>
+      {% endfor %}
+
+    </section>
+
+    <div class="all__recipes">
+      <a href="/recipes">Ver todas as receitas
+        <span class="material-icons">
+          double_arrow
+        </span>
+      </a>
+
+    </div>
+
+  </main>
+{% endblock content %}

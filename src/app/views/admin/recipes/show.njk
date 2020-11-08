@@ -1,0 +1,68 @@
+{% extends "adminLayout.njk" %}
+
+{% block head %}
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+{% endblock head %}
+
+{% block content %}
+  <main>
+    <section class="detail">
+      <div class="detail__header">
+        <h3>Receita:
+          {{recipe.title}}</h3>
+        <div class="header__form">
+          <form method="POST" action="/admin/recipes?_method=DELETE">
+            <input type="hidden" name="id" value="{{recipe.id}}">
+            <button type="submit" class="form__delete">Deletar</button>
+          </form>
+          <a href="/admin/recipes/{{recipe.id}}/edit" class="detail__edit">Editar Receita</a>
+        </div>
+      </div>
+
+      <div class="detail__image">
+        <img src="{{files[0].src}}" alt="{{files[0].name}}"/>
+      </div>
+
+      <h2>{{recipe.title}}</h2>
+      <p>por
+        {{chef.name}}</p>
+
+      <div class="ingredients">
+        <div class="ingredients__header">
+          <h3>Ingredientes</h3>
+
+        </div>
+        <ul>
+          {% for item in recipe.ingredients %}
+            <li>{{item}}</li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="preparation">
+        <div class="preparation__header">
+          <h3>Modo de preparo</h3>
+
+        </div>
+
+        <ul>
+          {% for item in recipe.preparation %}
+            <li>{{item}}</li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      {% if recipe.information !== "" %}
+        <div class="information">
+          <div class="preparation__header">
+            <h3>Informações adicionais</h3>
+
+          </div>
+
+          <p >{{recipe.information}}</p>
+        </div>
+      {% endif %}
+
+    </section>
+  </main>
+{% endblock content %}

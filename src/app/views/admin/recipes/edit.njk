@@ -1,0 +1,103 @@
+{% extends "adminLayout.njk" %}
+
+{% block head %}
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+{% endblock head %}
+
+{% block content %}
+  <main>
+    <section class="detail">
+      <form action="/admin/recipes?_method=PUT" method="post">
+        <div class="form__header">
+          <h3>Editar receita</h3>
+
+          <button type="submit" class="form__save">Salvar Receita</button>
+        </div>
+
+        <input type="hidden" name="id" value="{{recipe.id}}">
+
+        <div class="form__item">
+          <label for="image">Imagem da receita</label>
+          <input type="url" name="image" id="image" placeholder="http://" value="{{recipe.image}}">
+        </div>
+
+        <div class="form__item">
+          <label for="title">Título da receita</label>
+          <input type="text" name="title" id="title" placeholder="Ex: Triplo bacon burger" value="{{recipe.title}}">
+        </div>
+
+        <div class="form__item">
+          <label for="author">Autor</label>
+          <select name="author" id="author">
+            {% for chef in chefs %}
+              <option value="{{chef.id}}" {% if chef.id == recipe.chef_id %} selected="selected" {% endif %}>{{chef.name}}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="form__item">
+          <div id="form_ingredients">
+            <label>Ingredientes</label>
+            {% for ingredient in recipe.ingredients %}
+              <div class="ingredient">
+                <input type="text" name="ingredients[]" placeholder="Ex: 300 g de bacon moído" value="{{ingredient}}">
+              </div>
+            {% endfor %}
+          </div>
+          <a class="form__button-add" onclick="addIngredient()">Adicionar novo ingrediente</a>
+        </div>
+
+        <div class="form__item">
+          <div id="form_preparation">
+            <label>Modo de preparo</label>
+            {% for prep in recipe.preparation %}
+              <div class="prep">
+                <input type="text" name="preparation[]" placeholder="Ex: Retire do forno e despeje o molho de tomate." value="{{prep}}">
+              </div>
+            {% endfor %}
+
+          </div>
+          <a class="form__button-add" onclick="addPreparation()">Adicionar novo passo</a>
+        </div>
+
+        <div class="form__item">
+          <label for="information">Informações adicionais</label>
+          <textarea name="information" id="information" cols="30" rows="10" placeholder="Ex: Pizza de liquidificador é uma receita deliciosa e super simples de preparar...">{{recipe.information}}</textarea>
+        </div>
+
+      </form>
+    </section>
+  </main>
+
+  <script>
+    function addIngredient() {
+      const ingredients = document.querySelector("#form_ingredients");
+      const fieldContainer = document.querySelectorAll(".ingredient");
+
+      const newField = fieldContainer[fieldContainer.length - 1].cloneNode(true);
+
+      if (newField.children[0].value == "") 
+        return false;
+      
+      newField
+        .children[0]
+        .value = "";
+      ingredients.appendChild(newField);
+    }
+
+    function addPreparation() {
+      const preparations = document.querySelector("#form_preparation");
+      const fieldContainer = document.querySelectorAll(".prep");
+
+      const newField = fieldContainer[fieldContainer.length - 1].cloneNode(true);
+
+      if (newField.children[0].value == "") 
+        return false;
+      
+      newField
+        .children[0]
+        .value = "";
+      preparations.appendChild(newField);
+    }
+  </script>
+{% endblock content %}

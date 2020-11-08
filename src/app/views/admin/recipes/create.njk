@@ -1,0 +1,118 @@
+{% extends "adminLayout.njk" %}
+
+{% block head %}
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+{% endblock head %}
+
+{% block content %}
+  <main>
+    <section class="detail">
+      <form action="/admin/recipes" method="post" enctype="multipart/form-data">
+        <div class="form__header">
+          <h3>Criando receita</h3>
+          <button type="submit" class="form__save">Salvar Receita</button>
+        </div>
+
+        <div class="form__item">
+          <label>Imagem da receita</label>
+          <div class="photos-container">
+            <div id="photos-upload">
+              <input type="file" name="photos" id="photos-input" accept="image/*" onchange="PhotosUpload.handleFileInput(event)" multiple="multiple">
+              <div class="add-photos">
+                <i class="material-icons">
+                  add
+                </i>
+              </div>
+            </div>
+
+            <div id="photos-preview">
+              {% if files %}
+                {% for image in files %}
+                  <div class="photo" id="{{image.id}}">
+                    <img src="{{image.src}}" alt="{{image.name}}">
+                    <i class="material-icons" onclick="PhotosUpload.removeOldPhoto(event)">
+                      close
+                    </i>
+                  </div>
+                {% endfor %}
+                <input type="hidden" name="removed_files">
+              {% endif %}
+            </div>
+          </div>
+        </div>
+
+        <div class="form__item">
+          <label for="title">Título da receita</label>
+          <input type="text" name="title" id="title" placeholder="Ex: Triplo bacon burger">
+        </div>
+
+        <div class="form__item">
+          <label for="author">Autor</label>
+          <select name="author" id="author">
+            {% for chef in chefs %}
+              <option value="{{chef.id}}">{{chef.name}}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="form__item">
+          <div id="form_ingredients">
+            <label>Ingredientes</label>
+            <div class="ingredient">
+              <input type="text" name="ingredients[]" placeholder="Ex: 300 g de bacon moído">
+            </div>
+          </div>
+          <a class="form__button-add" onclick="addIngredient()">Adicionar novo ingrediente</a>
+        </div>
+
+        <div class="form__item">
+          <div id="form_preparation">
+            <label>Modo de preparo</label>
+            <div class="prep">
+              <input type="text" name="preparation[]" placeholder="Ex: Retire do forno e despeje o molho de tomate.">
+            </div>
+          </div>
+          <a class="form__button-add" onclick="addPreparation()">Adicionar novo passo</a>
+        </div>
+
+        <div class="form__item">
+          <label for="information">Informações adicionais</label>
+          <textarea name="information" id="information" cols="30" rows="10" placeholder="Ex: Pizza de liquidificador é uma receita deliciosa e super simples de preparar..."></textarea>
+        </div>
+
+      </form>
+    </section>
+  </main>
+
+  <script>
+    function addIngredient() {
+      const ingredients = document.querySelector("#form_ingredients");
+      const fieldContainer = document.querySelectorAll(".ingredient");
+
+      const newField = fieldContainer[fieldContainer.length - 1].cloneNode(true);
+
+      if (newField.children[0].value == "") 
+        return false;
+      
+      newField
+        .children[0]
+        .value = "";
+      ingredients.appendChild(newField);
+    }
+
+    function addPreparation() {
+      const preparations = document.querySelector("#form_preparation");
+      const fieldContainer = document.querySelectorAll(".prep");
+
+      const newField = fieldContainer[fieldContainer.length - 1].cloneNode(true);
+
+      if (newField.children[0].value == "") 
+        return false;
+      
+      newField
+        .children[0]
+        .value = "";
+      preparations.appendChild(newField);
+    }
+  </script>
+{% endblock content %}

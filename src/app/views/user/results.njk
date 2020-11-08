@@ -1,0 +1,27 @@
+{% extends "layout.njk" %}
+
+{% block search %}
+  <form action="/results" method="get">
+    <input type="text" name="filter" placeholder="Buscar uma receita" {% if filter %} value="{{filter}}" {% endif %}>
+    <button>Buscar</button>
+  </form>
+{% endblock search %}
+
+{% block content %}
+  <main>
+    <h2>Buscando por "{{filter}}"</h2>
+
+    <section class="recipes">
+      {% for recipe in recipes %}
+        <div class="recipe">
+          <div class="recipe__image">
+            <img src="{{recipe.image}}" alt="Imagem de {{recipe.title}}"/>
+          </div>
+          <h3>{{recipe.title}}</h3>
+
+          <a href="/recipes/{{recipe.id}}" class="button">Ver Receita</a>
+        </div>
+      {% endfor %}
+    </section>
+  </main>
+{% endblock content %}

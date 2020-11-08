@@ -1,0 +1,30 @@
+{% extends "adminLayout.njk" %}
+
+{% block head %}
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+{% endblock head %}
+
+{% block content %}
+  <main>
+    <section class="detail">
+      <form action="/admin/chefs" method="post">
+        <div class="form__header">
+          <h3>Criando chefs</h3>
+          <button type="submit" class="form__save">Salvar Chef</button>
+        </div>
+
+        <div class="form__item">
+          <label for="name">Nome</label>
+          <input type="text" name="name" id="name" placeholder="Nome do chef">
+        </div>
+
+        <div class="form__item">
+          <label for="image">Avatar</label>
+          <input type="url" name="image" id="image" placeholder="http://">
+        </div>
+
+      </form>
+    </section>
+  </main>
+
+{% endblock content %}

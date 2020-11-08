@@ -1,0 +1,64 @@
+{% extends "layout.njk" %}
+
+{% block head %}
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+{% endblock head %}
+
+{% block content %}
+  <main>
+    <section class="detail">
+      <div class="detail__image">
+        <img src="{{recipe.image}}" alt="Imagem de {{recipe.title}}"/>
+      </div>
+
+      <h2>{{recipe.title}}</h2>
+      <p>por
+        {{chef.name}}</p>
+
+      <div class="ingredients">
+        <div class="ingredients__header">
+          <h3>Ingredientes</h3>
+
+          <span class="material-icons" id="ing_hidden">
+            arrow_drop_up
+          </span>
+        </div>
+        <ul>
+          {% for item in recipe.ingredients %}
+            <li>{{item}}</li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="preparation">
+        <div class="preparation__header">
+          <h3>Modo de preparo</h3>
+          <span class="material-icons" id="pre_hidden">
+            arrow_drop_up
+          </span>
+        </div>
+
+        <ul>
+          {% for item in recipe.preparation %}
+            <li>{{item}}</li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      {% if recipe.information !== null %}
+        <div class="information">
+          <div class="preparation__header">
+            <h3>Informações adicionais</h3>
+
+            <span class="material-icons" id="info_hidden">
+              arrow_drop_up
+            </span>
+          </div>
+
+          <p>{{recipe.information}}</p>
+        </div>
+      {% endif %}
+
+    </section>
+  </main>
+{% endblock content %}

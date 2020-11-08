@@ -1,0 +1,33 @@
+{% extends "adminLayout.njk" %}
+
+{% block head %}
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+{% endblock head %}
+
+{% block content %}
+  <main>
+    <section class="detail">
+      <form action="/admin/chefs?_method=PUT" method="post">
+        <div class="form__header">
+          <h3>Editar chef</h3>
+
+          <button type="submit" class="form__save">Salvar chef</button>
+        </div>
+
+        <input type="hidden" name="id" value="{{chef.id}}">
+
+        <div class="form__item">
+          <label for="name">Nome</label>
+          <input type="text" name="name" id="name" placeholder="Nome do chef" value="{{chef.name}}">
+        </div>
+
+        <div class="form__item">
+          <label for="image">Avatar</label>
+          <input type="url" name="image" id="image" placeholder="http://" value="{{chef.avatar_url}}">
+        </div>
+
+      </form>
+    </section>
+  </main>
+
+{% endblock content %}
