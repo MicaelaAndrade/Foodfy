@@ -17,8 +17,8 @@ Construir um site completo para uma empresa de receitas chamada Foodfy. 🚀🚀
 
 <hr />
 
-<div align="center" >
-  <img src="https://user-images.githubusercontent.com/53954022/85406183-ccadea80-b537-11ea-88bc-882a1814d761.png" alt="Desafio">
+<div align="center">
+  <img src="https://user-images.githubusercontent.com/48728541/86298204-96293d00-bbd3-11ea-890e-8f8a41bb2de8.gif" />
 </div>
 
 <hr />
@@ -35,8 +35,7 @@ Construir um site completo para uma empresa de receitas chamada Foodfy. 🚀🚀
 
 <hr />
 
-## 🖥 Tecnologias
-Criação das seguintes tecnologias:
+## 🖥 Tecnologias:
 <hr />
 
 - ✔️ NodeJS
