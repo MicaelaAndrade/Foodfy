@@ -17,8 +17,6 @@ Construir um site completo para uma empresa de receitas chamada Foodfy. 🚀🚀
 
 <hr />
 
-<div align="center" >
-  
 <div align="center">
   <img src="https://user-images.githubusercontent.com/48728541/86298204-96293d00-bbd3-11ea-890e-8f8a41bb2de8.gif" />
 </div>
